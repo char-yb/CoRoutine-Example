@@ -26,4 +26,16 @@ CPU 바운드 작업을 위한 디스패처
 #### viewModelScope
 - viewModelScope는 ViewModel의 생명주기를 인식하는 CoroutineScope이다.
 
+## CoroutineDispatcher 요약
+- Dispatcher.IO는 네트워크 요청이나 DB 읽기 쓰기 같은 입출력 작업을 실행하는 디스패처
+- Dispatcher.Default는 CPU 바운드 작업을 위한 디스패처
+
+- Dispatcher.IO와 Dispatcher.Default는 코루틴 라이브러리의 공유 스레드풀을 사용한다.
+- Dispatcher.Default의 limitedParallelism 함수를 사용하면, 
+Dispatcher.Default의 스레드 중 일부만을 사용하는 CoroutineDispatcher로 생성할 수 있다.
+- Dispatcher.IO의 limitedParallelism 함수를 사용하면 공유 스레드 풀의 별도 스레드를 사용하는 CoroutineDispatcher로 생성할 수 있다.
+
+- Dispatcher.Main은 메인 스레드에서 동작하는 디스패처
+- Dispatcher.Main.immediate는 메인 스레드에서 동작하는 디스패처로, 현재 실행 중인 작업이 끝날 때까지 다른 작업을 대기시키는 것이 아니라, 바로 메인 스레드에서 실행한다.
+
 
