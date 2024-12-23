@@ -6,16 +6,22 @@ class Example4 {
 }
 
 fun main() = runBlocking {
+    val startTime = System.currentTimeMillis()
     val longJob: Job = launch(Dispatchers.Default) {
-        Thread.sleep(1000L)
-        println("[${Thread.currentThread().name}] launch 동작")
+        repeat(10) { repeatTime ->
+            delay(1000L)
+            println("[${getElapsedTime(startTime)}] $repeatTime 번째 실행")
+        }
     }
 
-    longJob.cancelAndJoin()
+    delay(2500L)
+    longJob.cancel()
 
-    executeAfterJobCancelled()
+//    longJob.cancelAndJoin()
+//    executeAfterJobCancelled()
 }
 
 fun executeAfterJobCancelled() {
     println("[${Thread.currentThread().name}] 취소 후 실행")
 }
+
